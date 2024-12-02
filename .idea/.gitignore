@@ -1,0 +1,9 @@
+# Default ignored files
+/../../Spycord /.idea/shelf/
+/../../Spycord /.idea/workspace.xml
+# Editor-based HTTP Client requests
+/../../Spycord /.idea/httpRequests/
+# Datasource local storage ignored files
+/../../Spycord /.idea/dataSources/
+/../../Spycord /.idea/dataSources.local.xml
+.env
